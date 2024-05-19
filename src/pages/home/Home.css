@@ -6,33 +6,57 @@
   --black: #1E1E1E;
   --white-font: #F0F0F0;
 }
-*{
+
+* {
   font-family: FontAwesome;
-  transition: 0.7s;
   border: none;
   box-sizing: border-box;
 }
-body{
+
+body {
   margin: 0;
   background-color: var(--white-font);
   overflow-x: hidden;
 }
-.header{
+
+.header {
   height: 20vh;
   width: 100vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   background-color: var(--black);
+  position: fixed;
+  top: -20vh;
+  animation: header linear forwards;
+  animation-timeline: scroll(root);
+  animation-range: 0 85svh;
+  z-index: 1;
 }
-.header1{
+
+@keyframes header {
+  10% {
+    top: 0;
+  }
+
+  80% {
+    top: 0;
+  }
+
+  100% {
+    top: -5vh;
+  }
+}
+
+.header1 {
   height: 5vh;
   width: 100vw;
   background-color: var(--main);
   display: flex;
   justify-content: end;
 }
-.header1-list{
+
+.header1-list {
   display: flex;
   flex-wrap: nowrap;
   width: fit-content;
@@ -40,61 +64,323 @@ body{
   margin: 0;
   margin-right: 2vw;
 }
-.header1-list > *{
+
+.header1-list>* {
   margin: auto 0.5vw;
   list-style-type: none;
   font-weight: bold;
-  color:var(--gray);
+  color: var(--gray);
   font-size: 18px;
 }
-.header1-list > * > a{
+
+.header1-list>*>a {
   color: var(--white-font);
   padding: 0.5vh 0.5vw;
   border-radius: 10px;
+  transition: 0.7s;
 }
-.header1-list > * > a:hover{
+
+.header1-list>*>a:hover {
   background-color: var(--gray);
   color: var(--black);
 }
-.mag::after{
+
+.mag::after {
   content: "\f002";
 }
-.header2{
+
+.user::after {
+  content: "\f007";
+}
+
+.header2 {
   width: 100vw;
   height: 15vh;
   display: flex;
   align-items: center;
-  background-image: linear-gradient(
-    135deg,
-    var(--secondary1),
-    var(--gray),
-    var(--secondary2)
-  );
+  background-image: linear-gradient(179deg,
+      var(--main),
+      var(--gray),
+      var(--secondary2));
 }
-.header2-logo{
+
+.header2-logo {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: auto 2vw auto 2vw;
   height: 12vh;
   aspect-ratio: 16/9;
-  overflow: hidden;
 }
-.header2-img{
-  height: 12vh;
-  aspect-ratio: 16/9;
-}
-.header2-img:hover{
+
+.header2-img {
   height: 15vh;
+  aspect-ratio: 16/9;
+  transition: 0.2s;
 }
-.header2-title{
+
+.header2-img:hover {
+  height: 18vh;
+}
+
+.header2-title {
   display: flex;
   align-items: center;
   text-align: center;
 }
-.header2-options{
-  margin: auto 2vw auto auto;
-  width: 40vw;
+
+.header2-list {
+  display: grid;
+  grid-template-columns: 150px 150px 200px;
+  grid-template-rows: 6vh 6vh;
   height: 12vh;
-  background-color: var(--black);
+  margin-inline: auto 1vw;
+}
+
+.header2-list>* {
+  align-self: center;
+  text-align: center;
+  list-style-type: none;
+  font-weight: bolder;
+  font-size: 22px;
+}
+
+.header2-list>*>a {
+  color: var(--white-font);
+  border-radius: 10px;
+}
+
+.pages {
+  width: 100vw;
+  min-height: 85vh;
+  height: fit-content;
+}
+
+.pages>* {
+  width: 100vw;
+  height: 85vh;
+}
+
+.pages>*:first-child {
+  width: 100vw;
+  height: 100svh;
+}
+
+.courses {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: bgCourses 30s ease-in-out 0s infinite alternate;
+  background-size: 100%;
+  background-image: linear-gradient(90deg,
+      #5F0F3C,
+      #0F3C80 100%);
+  overflow: hidden;
+}
+
+.courses-title {
+  font-size: 80px;
+  font-weight: bold;
+  color: transparent;
+  background-clip: text;
+  background-image: linear-gradient(90deg,
+      var(--secondary1),
+      var(--secondary2) 100%);
+}
+
+.courses-list {
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+  min-width: 400vw;
+  height: 50vh;
+  animation: courses 30s ease-in-out 0s infinite alternate;
+  top: -10svh;
+}
+
+@keyframes courses {
+  0% {
+    left: 150vw;
+  }
+
+  100% {
+    left: -150vw;
+  }
+}
+
+.course {
+  width: 25vw;
+  height: 50vh;
+  border-radius: 10%;
+  background-color: transparent;
+  perspective: 1000px;
+}
+
+.course-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s linear;
+  transform-style: preserve-3d;
+}
+
+.course:hover .course-content {
+  transform: rotateY(180deg);
+}
+
+.course-front,
+.course-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.course-title {
+  position: relative;
+  display: flex;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--white-font);
+  width: 100%;
+  height: 50vh;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  text-wrap: wrap;
+  font-size: 45px;
+  font-weight: bold;
+  margin: 0;
+  z-index: 1;
+  padding-inline: 5vw;
+}
+
+.course-img {
+  position: relative;
+  top: -50vh;
+  width: 100%;
+  height: 100%;
+}
+
+.course-back {
+  right: 0;
+  background-color: #2980b9;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.course-back-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 10vh;
+  text-align: center;
+  font-size: 45px;
+  font-weight: bold;
+  color: black;
+  margin: 0;
+}
+
+.course-back-name {
+  display: flex;
+  height: 30vh;
+  padding-inline: 5vw;
+  font-size: 60px;
+  font-weight: bold;
+  color: black;
+  -webkit-text-stroke-width: .5px;
+  -webkit-text-stroke-color: var(--white-font);
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.duolingo {
+  background-color: #131F24;
+}
+
+.duolingo-content {
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.duolingo-decoration {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: -100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.duolingo-decoration-block1 {
+  position: relative;
+  width: 200%;
+  height: 100%;
+  z-index: 2;
+  background-color: #58CC02;
+  transform: rotate(-30deg);
+  animation: blocks linear forwards;
+  animation-timeline: scroll(root);
+  animation-range: 0 85svh;
+}
+
+.duolingo-decoration-block2 {
+  position: relative;
+  width: 200%;
+  height: 200%;
+  z-index: 1;
+  background-color: #FFFFFF;
+  transform: rotate(30deg);
+  left: -35vw;
+  animation: blocks linear forwards;
+  animation-timeline: scroll(root);
+  animation-range: 0 85svh;
+}
+
+@keyframes blocks {
+  0%{
+    top: -50vh;
+  }
+  100%{
+    top: 0;
+  }
+}
+
+.duolingo-decoration-characters {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  top: -255vh;
+  filter: drop-shadow(2px 2px 5px var(--secondary1)) drop-shadow(-2px -2px 5px var(--secondary2));
+  animation: characters linear forwards;
+  animation-timeline: scroll(root);
+  animation-range: 0 85svh;
+}
+
+@keyframes characters {
+  0%{
+    opacity: 0;
+    left: 0;
+    top: -275vh;
+  }
+  50%{
+    opacity: 1;
+  }
+  100%{
+    left: -35%;
+    top: -245vh;
+  }
 }
